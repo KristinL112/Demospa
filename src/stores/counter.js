@@ -1,12 +1,17 @@
+// Importerar 'ref' och 'computed' från Vue's Composition API
 import { ref, computed } from 'vue'
+
+// Importerar 'defineStore' från Pinia för att skapa en store
 import { defineStore } from 'pinia'
 
+// Skapar och exporterar en Pinia store med namnet 'counter'
 export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0)
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
-  }
+  // Skapar en ref-variabel 'naming' med initialt värde 'Carlsson'
+  const naming = ref('Carlsson')
 
-  return { count, doubleCount, increment }
+  // Skapar en computed property 'nameAfter' som är dubbelt så stor som värdet av 'naming'
+  const nameAfter = computed(() => naming.value * 2)
+
+  // Returnerar de skapade variablerna och properties för att användas i komponenter
+  return { naming, nameAfter }
 })
