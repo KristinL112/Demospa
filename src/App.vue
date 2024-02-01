@@ -5,6 +5,7 @@ import FooterComponent from './components/FooterComponent.vue';
 
 <template>
   <header>
+
 <!-- Nav -->
 <NavBar/>
 <!-- FooterComponent -->
