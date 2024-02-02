@@ -93,3 +93,27 @@
         margin-bottom: 20vh;
     }
 </style>
+<!-- Ang metoden att ange name, och "component spa-offers" -->
+<!--
+
+I Vue.js används name-egenskapen för att ge komponenten ett namn.
+Namnet kan vara användbart för debugging och identifiering av komponenten.
+I det här fallet är komponentens namn satt till 'HomeView'. Detta kan vara användbart
+när du tittar på Vue DevTools eller när du arbetar med komponenter i en större
+Vue.js-applikation.
+
+Därefter har vi components-egenskapen, där en komponent med namnet 'spa-offer'
+associeras med den faktiska komponenten SpaOffers. Detta skapar en parentes där namnet
+
+('spa-offer') är komponentens tag-namn och SpaOffers är den faktiska komponenten som
+används. Detta gör det möjligt att använda 'spa-offer' som ett anpassat HTML-element
+i mallen för den aktuella komponenten.
+
+Så, om du skulle använda 'spa-offer' i din template för komponenten HomeView,
+skulle det tolkas som att använda den SpaOffers-komponenten i det här fallet.
+Detta kan vara användbart för att organisera och använda komponenter inom en större
+Vue-applikation. Det ger en klar och modulär struktur till koden.
+
+Tips:
+https://www.youtube.com/watch?v=jIB1bE57JQg&t=158s
+ -->
