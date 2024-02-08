@@ -1,97 +1,99 @@
 <!-- Denna del av koden använder 'script setup' för att importera komponenter och använda Composition API -->
 <script setup>
-    // Importerar komponenten HeroImage.vue
-    import HeroImage from '../components/HeroImage.vue'
+  // Importerar komponenten HeroImage.vue
+  import HeroImage from '../components/HeroImage.vue'
 
-    // Importerar komponenten SpaOffers.vue
-    import SpaOffers from '../components/SpaOffers.vue'
+  // Importerar komponenten SpaOffers.vue
+  import SpaOffers from '../components/SpaOffers.vue'
 
-    // Importerar 'ref' från Vue's Composition API för att använda reactive data
-    import { ref } from 'vue'
+  // Importerar 'ref' från Vue's Composition API för att använda reactive data
+  import { ref } from 'vue'
 
-    // Importerar komponenten MailForm.vue
-    import MailForm from '../components/MailForm.vue'
+  // Importerar komponenten MailForm.vue
+  import MailForm from '../components/MailForm.vue'
 
-    // Skapar en ref-variabel 'show' som är initialt satt till 'true'
-    const show = ref(true)
+  // Skapar en ref-variabel 'show' som är initialt satt till 'true'
+  const show = ref(true)
 </script>
 
 <!-- Denna del av koden utgör HTML-mallen -->
 <template>
-    <!-- Använder HeroImage-komponenten för att visa en hjältebild eller hjälteomslag -->
-    <HeroImage />
+  <!-- Använder HeroImage-komponenten för att visa en hjältebild eller hjälteomslag -->
+  <HeroImage />
 
-    <!-- En rubrik (h1) som visar ett dynamiskt meddelande baserat på data från 'message' -->
-    <h1 class="title">{{ message }}</h1>
+  <!-- En rubrik (h1) som visar ett dynamiskt meddelande baserat på data från 'message' -->
+  <h1 class="title">{{ message }}</h1>
 
-    <!-- En sektion för att visa olika spa-erbjudanden -->
-    <div id="offers">
-        <div class="container text-center">
-            <div class="row align-items-center">
-                <!-- Använder SpaOffers-komponenten för varje spa-erbjudande i listan 'spas' -->
-                <spa-offer v-for="spa in spas" :key="spa.id" :offer="spa" />
-            </div>
-        </div>
+  <!-- En sektion för att visa olika spa-erbjudanden -->
+  <div id="offers">
+    <div class="container text-center">
+      <div class="row align-items-center">
+        <!-- Använder SpaOffers-komponenten för varje spa-erbjudande i listan 'spas' -->
+        <spa-offer v-for="spa in spas" :key="spa.id" :offer="spa" />
+      </div>
     </div>
+  </div>
 
-    <!-- En sektion för kontakt och ett knapptryck som växlar 'show'-variabeln -->
-    <div id="contact">
-        <button class="btn btn-primary" @click="show = !show">
-            Vill du kontakta oss?
-        </button>
+  <!-- En sektion för kontakt och ett knapptryck som växlar 'show'-variabeln -->
+  <div id="contact">
+    <button class="btn btn-primary" @click="show = !show">
+      Vill du kontakta oss?
+    </button>
 
-        <!-- Visar MailForm-komponenten endast om 'show' är falskt -->
-        <div v-if="!show">
-            <MailForm />
-        </div>
+    <!-- Visar MailForm-komponenten endast om 'show' är falskt -->
+    <div v-if="!show">
+      <MailForm />
     </div>
+  </div>
 </template>
 
 <!-- Denna del av koden är för JavaScript-logik och metoder -->
 <script>
-    export default {
-        // Data-funktion som returnerar initiala data för komponenten
-        data() {
-            return {
-                spas: [],      // En tom lista för spa-erbjudanden
-                message: 'Vilket paket önskas?'  // Ett initialt meddelande
-            }
-        },
-        name: 'HomeView',  // Namn på komponenten
-        components: { 'spa-offer': SpaOffers },  // Användning av SpaOffers-komponenten
-        created() {
-            // Efter att komponenten har monterats, hämta data från spa.json-filen
-            this.fetchData()
-        },
-        methods: {
-            // En metod för att hämta spa-data från en json-fil asynkront
-            async fetchData() {
-                const res = await fetch('spa.json')
-                const val = await res.json()
-                this.spas = val  // Sätter data från filen till 'spas'-listan
-            }
-        }
+  export default {
+    // Data-funktion som returnerar initiala data för komponenten
+    data() {
+      return {
+        spas: [], // En tom lista för spa-erbjudanden
+        message: 'Vilket paket önskas?' // Ett initialt meddelande
+      }
+    },
+    name: 'HomeView', // Namn på komponenten
+    components: { 'spa-offer': SpaOffers }, // Användning av SpaOffers-komponenten
+    created() {
+      // Efter att komponenten har monterats, hämta data från spa.json-filen
+      this.fetchData()
+    },
+    methods: {
+      // En metod för att hämta spa-data från en json-fil asynkront
+      async fetchData() {
+        const res = await fetch(
+          'api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=a4aefd72e719e219fe4cc1cc187f0326'
+        )
+        const val = await res.json()
+        this.spas = val // Sätter data från filen till 'spas'-listan
+      }
     }
+  }
 </script>
 
 <!-- Denna del av koden är för stilmallar som gäller endast för den här komponenten -->
 <style scoped>
-    /* Stilar för att centrera och styla 'offers'- och 'contact'-sektionerna */
-    #offers {
-        display: flex;
-        justify-content: center;
-        margin-top: 10vh;
-        margin-bottom: 10vh;
-    }
+  /* Stilar för att centrera och styla 'offers'- och 'contact'-sektionerna */
+  #offers {
+    display: flex;
+    justify-content: center;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+  }
 
-    #contact {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        width: 300px;
-        margin: 0 auto;
-        margin-bottom: 20vh;
-    }
+  #contact {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+    margin-bottom: 20vh;
+  }
 </style>
 <!-- Ang metoden att ange name, och "component spa-offers" -->
 <!--
